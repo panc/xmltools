@@ -1,0 +1,107 @@
+body {
+  padding-top: 50px;
+}
+
+.intro {
+  padding: 10px 15px;
+  text-align: center;
+  background-color: #eee;
+}
+
+.codeEditor {
+	height: 300px !important;
+	font-family: 'Consolas', 'Courier New';
+	font-size: 10pt;
+}
+
+#localFileName { width: 250px }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.rssItem {
+	margin-bottom: 20px;
+	background-color: #eee;
+}
+
+.rssItem .rssText {
+	padding: 5px;
+}
+
+.rssItem img {
+	max-width:100%;
+	max-height:100%;
+}
+
+div.result-item {
+	background-color: #ccc;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+.jstree {
+	font-size: 12px;
+	margin-bottom: 20px;
+}
+
+.mypanel {
+	border-style: solid;
+    border-width: 1px;
+    border-color: #d8d8d8;
+    margin-bottom: 1.25rem;
+    padding: 10px;
+    background: #f3f3f3;
+	
+	
+}
+
+.resultpanel {
+	min-height: 400px;
+}
+
+#root {
+	margin: 10px;
+}
+
+.tab-inner {
+	margin-top: 10px;
+}
+
+#detailsinfo { position: fixed; }	
+
+/* validation */
+.console {
+    font-family: 'Consolas', 'Courier New';
+	font-size: 10pt;
+}
+
+.validation-success {
+    color: #288C35;
+    font-weight: bold;
+    border: 1px solid;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.validation-error {
+    color: #B13333;
+    font-weight: bold;
+    border: 1px solid;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+/* Code Mirror */
+
+ .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+}
+
+.cm-s-xq-light span.cm-meta {
+    color: #60940F;
+}

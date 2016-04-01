@@ -1,0 +1,71 @@
+html, body {
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+text {
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+rect {
+  fill: #fff;
+}
+
+.node > rect {
+  stroke-width: 1px;
+  stroke: #333;
+  fill: none;
+  opacity: 0.5;
+}
+
+.edge rect {
+  fill: #fff
+}
+
+.edgePath path {
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+.type-text > rect {
+  fill: #FFCC00;
+}
+
+.type-comment > rect {
+  fill: #ffae6a;
+}
+
+.type-element > rect {
+  fill: #92ff7d;
+}
+
+.type-attribute > rect {
+  fill: #CC0000;
+}
+
+.type-root > rect {
+  fill: #96c2ff;
+}
+
+.main-svg {
+  left: 0;
+  margin-top: 20px;
+  height: 600px;
+  width: 100%;
+  border: 1px solid #999;
+}
+
+.legend-svg {
+  position: fixed;
+  height: 60px;
+  width: 600px;
+}
+
+
+.legend {
+  stroke-width: 3px;
+  stroke: #333;
+  fill: none;
+  opacity: 0.5;
+}

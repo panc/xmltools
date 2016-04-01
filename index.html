@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>XPath Demo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/visualize/visualizer.css" rel="stylesheet">
+    <link href="lib/jstree/jstree.css" rel="stylesheet">
+    <link href="lib/codemirror/codemirror.css" rel="stylesheet">
+    <link href="lib/codemirror/xq-light.css" rel="stylesheet">
+    
+    <link href="css/my-styles.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Markup Languages: XML toolkit</a>
+        </div>
+    </nav>
+
+	<div>
+		<div id="root">
+		  <!-- Tab panes -->
+		  <div>
+
+			  <!-- Nav tabs -->
+			  <ul id="mainTabs" class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">XML &amp; XPath</a></li>
+				<li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Tree Visualization</a></li>
+				<li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">DTD Validation</a></li>
+				<li role="presentation"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">XSD Validation</a></li>
+				<li role="presentation"><a href="#tab5" aria-controls="tab5" role="tab" data-toggle="tab">XSLT Transformation</a></li>
+			  </ul>
+
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="tab1">
+				
+					<div class="tab-inner">
+						
+						<div class="col-md-2">
+							<div class="mypanel resultpanel">
+								<h2>Tree</h2>
+								<div id="myTree"></div>
+							</div>
+						</div>
+						
+						<div class="col-md-10">
+						
+							<div class="col-md-8">
+								<div class="mypanel">
+									<h3>XML File</h3>
+									<form class="form-inline"> 
+										<div class="form-group">
+											<label for="rssInputUrl">Local File name</label> 
+											<input type="text" class="form-control" id="localFileName" placeholder="Local file name" value="01_books.xml" />
+											<button id="loadLocalXmlFileButton" type="button" class="btn btn-default">Load local XML file</button>
+										</div>
+									</form>
+									<form> 
+										<div class="form-group"> 
+											<label for="rssInputUrl">XML File</label> 
+											<textarea class="form-control codeEditor" id="inputXml" placeholder="XML Content" value=""></textarea>
+										</div> 
+										<button id="showVisualizationButton" type="button" class="btn btn-default">Load XML Document</button> 
+									</form>
+								</div>
+								
+								<div class="mypanel" id="result-list">
+									<form> 
+											<div class="form-group">
+												<label for="rssInputUrl">XPath expression</label> 
+												<input type="text" class="form-control" id="inputXpath" placeholder="XPath expression" value="//*" />
+											</div>
+											<button id="evaluateXPathButton" type="button" class="btn btn-default">Evaluate XPath on XML File</button> 
+											</form>
+									<h3>Found Elements:</h3>
+									<table class="table table-striped  table-condensed">
+										<thead>
+											<tr>
+												<th style="width: 50px">Type</th>
+												<th style="width: 100px">Name</th>
+												<th>OuterText / Value</th>
+											</tr>
+										</thead>
+										<tbody id="resultBody">
+										</tbody>
+									</table>
+								</div>
+								
+							</div>
+							
+							<div class="col-md-4">
+								<div id="detailsinfo" class="mypanel resultpanel">
+									<h2>Details</h2>
+									<p>In the following  details about the selected node in the tree are shown:</p>
+									<label>Type:</label><pre id="info-type">Element</pre>
+									<label>Namespace:</label><pre id="info-namespace">My-Namespace</pre>
+									<label>Value:</label><pre id="info-value"></pre>
+									<label>Outer Text:</label><pre id="info-outerText"></pre>
+									<div id="attributes-info">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> <!-- end tab inner -->
+				
+				</div> <!-- end tab 1: xml&xpath -->
+                                
+				<div role="tabpanel" class="tab-pane" id="tab2">
+					<div class="tab-inner">
+						<svg id="svg-canvas" style="width: 100%; height: 500px" />
+					</div> <!-- end tab inner -->
+				</div> <!-- end tab 2: tree visualization -->
+				
+                <div role="tabpanel" class="tab-pane" id="tab3">
+					<div class="tab-inner">
+                        
+                        <div class="col-md-8">
+                            <div class="mypanel">
+                                <h3>DTD Validation</h3>
+                    
+                                <div class="form-group"> 
+                                    <label>XML file and DTD definition to validate:</label> 
+                                    <textarea class="form-control codeEditor" id="xmlAndDtDToValidate" placeholder="XML Content" value=""></textarea>
+                                </div> 
+                            </div>
+						</div>
+							
+                        <div class="col-md-4">
+                            <div class="mypanel">
+                                <h2>Validation Result</h2>
+                                <button id="validateDtd" type="button" class="btn btn-default">Validate</button> 
+                                
+                                <p class="result" id="dtd-validation-result"></p>
+                                
+                                <div>
+                                    <h3>Output</h3>
+                                    
+                                    <textarea class="console form-control" id="dtd-validation-console" style="height: 150px"></textarea>
+                                </div>
+                            </div>
+                        </div>
+					</div> <!-- end tab inner -->
+				</div> <!-- end tab 3: DTD Validation -->
+                
+                <div role="tabpanel" class="tab-pane" id="tab4">
+					<div class="tab-inner">
+                        						
+						<div class="col-md-8">
+                            <div class="mypanel">
+                                <h3>XML Schema Validation</h3>
+                            
+                                <!-- tabs -->
+                                <ul id="validataionTabs" class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#val1" aria-controls="val1" role="tab" data-toggle="tab">XML File</a></li>
+                                    <li role="presentation"><a href="#val2" aria-controls="val2" role="tab" data-toggle="tab">XML Schema</a></li>
+                                </ul>
+                                
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="val1">
+                                        <div class="tab-inner">
+                                            <div class="form-group"> 
+                                                <label>XML file to validate:</label> 
+                                                <textarea class="form-control codeEditor" id="xmlToValidate" placeholder="XML Content" value=""></textarea>
+                                            </div> 
+                                        </div> <!-- end tab inner -->
+                                    </div> <!-- end tab 2: tree visualization -->
+                                    
+                                    <div role="tabpanel" class="tab-pane" id="val2">
+                                        <div class="tab-inner">
+                                            <div class="form-group"> 
+                                                <label>XML Schema:</label> 
+                                                <textarea class="form-control codeEditor" id="xmlSchema" placeholder="XML Schema" value=""></textarea>
+                                            </div>   
+                                        </div> <!-- end tab inner -->
+                                    </div> <!-- end tab 2: tree visualization -->
+                                </div>                              
+                            </div>
+						</div>
+							
+                        <div class="col-md-4">
+                            <div class="mypanel">
+                                <h2>Validation Result</h2>
+                                <button id="validateXsd" type="button" class="btn btn-default">Validate</button> 
+                                
+                                <p class="result" id="xsd-validation-result"></p>
+                                
+                                <div>
+                                    <h3>Output</h3>
+                                    
+                                    <textarea class="console form-control" id="xsd-validation-console" style="height: 150px"></textarea>
+                                </div>
+                            </div>
+                        </div>
+					</div> <!-- end tab inner -->
+				</div> <!-- end tab 4: XSD Validation -->
+				
+                <div role="tabpanel" class="tab-pane" id="tab5">
+					<div class="tab-inner">
+					</div> <!-- end tab inner -->
+				</div> <!-- end tab 5: XSLT Transformation -->
+			  </div>
+
+			</div> <!-- end tab panes -->
+				
+		</div> <!-- end root -->
+	</div>
+
+
+    <script src="lib/jquery/jquery.min.js"></script>
+	<script src="lib/bootstrap/bootstrap.js"></script>
+    <script src="lib/d3/d3.v3.min.js" charset="utf-8"></script>
+	<script src="lib/d3/dagre-d3.js"></script>
+	<script src="lib/jstree/jstree.min.js"></script>
+    <script src="lib/visualize/visualize.js"></script>
+    <script src="lib/xmllint/xmllint.js"></script>
+    
+    <script src="lib/codemirror/codemirror.js"></script>
+    <script src="lib/codemirror/match-highlighter.js"></script>
+    <script src="lib/codemirror/matchtags.js"></script>
+    <script src="lib/codemirror/xml-fold.js"></script>
+    <script src="lib/codemirror/xml.js"></script>
+    
+    <script src="lib/jssaxparser/sax.js"></script>
+    <script src="lib/jssaxparser/DomContentHandler.js"></script>
+    <script src="lib/jssaxparser/validation_common/dom_utils.js"></script>
+    <script src="lib/jssaxparser/validation_common/validator_functions.js"></script>
+    <script src="lib/jssaxparser/validation_common/validator_objects.js"></script>
+    <script src="lib/jssaxparser/jsdatatypelibrary-0.4/datatype_library.js"></script>
+    
+    <script src="js/helpers.js"></script>
+    <script src="js/xpath.js"></script>
+	<script src="js/dtd.js"></script>
+    <script src="js/xsd.js"></script>
+    <script src="js/transform.js"></script>
+    
+    <script>
+        $(document).ready(function() {	
+            if (location.hash !== '') 
+                $('a[href="' + location.hash + '"]').tab('show');
+                
+            $('#mainTabs a[data-toggle="tab"]').on('shown.bs.tab', function(e) { 
+                if (history.pushState && window.history.state) 
+                    history.pushState(null, null, '#'+$(e.target).attr('href').substr(1)); 
+                else 
+                    location.hash = '#'+$(e.target).attr('href').substr(1); 
+            });
+        });
+    </script>
+  </body>
+</html>
