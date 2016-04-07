@@ -131,10 +131,31 @@
                             <div class="mypanel">
                                 <h3>DTD Validation</h3>
                     
-                                <div class="form-group"> 
-                                    <label>XML file and DTD definition to validate:</label> 
-                                    <textarea class="form-control codeEditor" id="xmlAndDtDToValidate" placeholder="XML Content" value=""></textarea>
-                                </div> 
+                                <!-- inner tabs -->
+                                <ul id="dtdTabHeaders" class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#dtd1" aria-controls="dtd1" role="tab" data-toggle="tab">XML File</a></li>
+                                    <li role="presentation"><a id="dtdFileNameHeader" href="#dtd2" aria-controls="dtd2" role="tab" data-toggle="tab">DTD Definition</a></li>
+                                </ul>
+                                
+                                <div id="dtdTabs" class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="dtd1">
+                                        <div class="tab-inner">
+                                            <div class="form-group"> 
+                                                <label>XML file to validate:</label> 
+                                                <textarea class="form-control codeEditor" id="xmlAndDtdToValidate" placeholder="XML Content" value=""></textarea>
+                                            </div> 
+                                        </div> <!-- end tab inner -->
+                                    </div> <!-- end inner tab 1: XML -->
+                                    
+                                    <div role="tabpanel" class="tab-pane" id="dtd2">
+                                        <div class="tab-inner">
+                                            <div class="form-group"> 
+                                                <input type="text" id="dtdFileName"" value="file-name.dtd"/>
+                                                <textarea class="form-control codeEditor" id="dtdToValidate" placeholder="DTD Content" value=""></textarea>
+                                            </div> 
+                                        </div> <!-- end tab inner -->
+                                    </div> <!-- end inner tab 1: XML -->
+                                </div>                              
                             </div>
 						</div>
 							
@@ -162,13 +183,14 @@
                             <div class="mypanel">
                                 <h3>XML Schema Validation</h3>
                             
-                                <!-- tabs -->
-                                <ul id="validataionTabs" class="nav nav-tabs" role="tablist">
+                                <!-- inner tabs -->
+                                <ul id="xsdTabHeaders" class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active"><a href="#val1" aria-controls="val1" role="tab" data-toggle="tab">XML File</a></li>
                                     <li role="presentation"><a href="#val2" aria-controls="val2" role="tab" data-toggle="tab">XML Schema</a></li>
+                                    <li id="addXsdTab" role="presentation"><a href="#add" aria-controls="add" role="tab" data-toggle="tab">+</a></li>
                                 </ul>
                                 
-                                <div class="tab-content">
+                                <div id="xsdTabs" class="tab-content">
                                     <div role="tabpanel" class="tab-pane active" id="val1">
                                         <div class="tab-inner">
                                             <div class="form-group"> 
@@ -176,16 +198,16 @@
                                                 <textarea class="form-control codeEditor" id="xmlToValidate" placeholder="XML Content" value=""></textarea>
                                             </div> 
                                         </div> <!-- end tab inner -->
-                                    </div> <!-- end tab 2: tree visualization -->
+                                    </div> <!-- end inner tab 1: XML -->
                                     
                                     <div role="tabpanel" class="tab-pane" id="val2">
                                         <div class="tab-inner">
                                             <div class="form-group"> 
                                                 <label>XML Schema:</label> 
                                                 <textarea class="form-control codeEditor" id="xmlSchema" placeholder="XML Schema" value=""></textarea>
-                                            </div>   
+                                            </div>
                                         </div> <!-- end tab inner -->
-                                    </div> <!-- end tab 2: tree visualization -->
+                                    </div> <!-- end inner tab 1: main XSD -->
                                 </div>                              
                             </div>
 						</div>

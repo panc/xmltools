@@ -12,6 +12,12 @@ String.prototype.trimLeft = function(charlist) {
     return this.replace(new RegExp("^[" + charlist + "]+"), "");
 };
 
+Array.prototype.remove = function(item) { 
+    this.splice(this.indexOf(item) == -1 
+        ? this.length 
+        : this.indexOf(item), 1); 
+}
+
 function getAbsoluteUrl(baseUrl, url) {
     var pattern = /^https?:\/\//i;
     if (pattern.test(url)) {

@@ -1,6 +1,8 @@
 ﻿$(document).ready(function() {	
     "use strict";
     
+    var additionalXsdFiles = [];
+    
     (function () {
 		if (window.validateXML) 
 			$(".console").text("xmllint loaded");
@@ -17,13 +19,11 @@
         clearConsole();
 
         if (xmlContent < 10) {
-			//$(".console").removeClass("valColor1").removeClass("valColor2");
 			setResult("Enter XML Content");
             consoleWriteLine("Enter XML Content"); 
 			return;
 		}
 		if (schema.length < 10) { 
-			//$(".valoutput").removeClass("valColor1").removeClass("valColor2");
 			setResult("Enter XML Schema");
             consoleWriteLine("Enter XML Schema");
 			return;
@@ -31,25 +31,26 @@
 
         consoleWriteLine("Validating ...");
 		
-		var Module = {
-			xml: xmlContent,
-			schema: schema,
-			arguments: ["--noout", "--schema", "file.xsd", "file.xml"]
-		};
+        var files = additionalXsdFiles.map(function(item){
+            
+            return {
+                path: $(item.content.find('.name')[0]).val(),
+                data: item.editor.getValue()
+            };
+        });
         
-		var result = validateXML(Module);
+        files.push({ path: 'mainSchema', data: schema });
+        files.push({ path: 'xml', data: xmlContent });
         
-        if (result.search("xml validates") > 0) 
-        {
+        var args = ['--noent', '--schema', 'mainSchema', 'xml'];
+	    var result = xmllint(args, files);
+        
+        if (result.stderr.indexOf("xml validates") > -1 ) 
 			setResult("Document validates against the schema!", true);
-		} 
         else
-        {
-			//$(output1).removeClass("valColor1").addClass("valColor2");
 			setResult("Document does not validate.", false);
-		}
         
-        consoleWriteLine(result);
+        consoleWriteLine(result.stderr);
     }
     
     function setResult(text, success) {
@@ -63,7 +64,7 @@
     }
     
     function consoleWriteLine(text) {
-		var value = $("#validation-console").val();
+		var value = $("#xsd-validation-console").val();
         $("#xsd-validation-console").val(value + text + "\r");
     }
     
@@ -71,37 +72,78 @@
         $("#xsd-validation-console").val(" ");
     }
     
-    var xmlContentEditor = CodeMirror.fromTextArea($("#xmlToValidate")[0], {
-        mode: "application/xml",
-        matchTags: {bothTags: true},
-        lineNumbers: true,
-        lineWrapping: true,
-        theme: "xq-light",
-        viewportMargin: Infinity,
-        extraKeys: {
-        }
-	});
+    var xmlContentEditor = createEditor($("#xmlToValidate")[0]);
 	xmlContentEditor.setValue("");
 	
-	var schemaEditor = CodeMirror.fromTextArea($("#xmlSchema")[0], {
-	    mode: "application/xml",
-	    matchTags: {bothTags: true},
-        lineNumbers: true,
-	    lineWrapping: true,
-	    theme: "xq-light",
-        viewportMargin: Infinity,
-        extraKeys: {            
-        }
-	});
+	var schemaEditor = createEditor($("#xmlSchema")[0]);
 	schemaEditor.setValue(""); 
     
+    function createEditor(textarea) {
+        return CodeMirror.fromTextArea(textarea, {
+            mode: "application/xml",
+            matchTags: {bothTags: true},
+            lineNumbers: true,
+            lineWrapping: true,
+            theme: "xq-light",
+            viewportMargin: Infinity,
+            extraKeys: { }
+        });
+    }
+        
     $('a[data-toggle="tab"][aria-controls="tab4"]').on('shown.bs.tab', function(e) { 
         xmlContentEditor.refresh();
         schemaEditor.refresh();
     });
     
-    $('#validataionTabs a[data-toggle="tab"]').on('shown.bs.tab', function(e) { 
+    $('#xsdTabHeaders a[data-toggle="tab"]').on('shown.bs.tab', function(e) { 
         xmlContentEditor.refresh();
         schemaEditor.refresh();
+    });
+    
+    $('#addXsdTab').on('click', function(){
+        
+        var id = additionalXsdFiles.length;
+        var name = 'Schema-Name-' + id;
+
+        var header = $('<li id="tab-header-val-' + id + '" role="presentation">' + 
+                            '<a href="#tab-content-val-' + id + '" aria-controls="tab-content-val-' + id + '" role="tab" data-toggle="tab">' + 
+                                '<span class="name">' + name + '</span>' + 
+                                '<span class="close">X</span>' +
+                            '</a>' +
+                        '</li>');        
+        
+        var content = $('<div role="tabpanel" class="tab-pane" id="tab-content-val-' + id + '">' +
+                            '<div class="tab-inner">' +
+                                '<div class="form-group">' + 
+                                    '<input type="text" class="name" value="' + name + '"/>' + 
+                                    '<textarea class="form-control codeEditor" placeholder="XML Schema" value=""></textarea>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>');
+        
+        $('#addXsdTab').before(header);
+        $('#xsdTabs').append(content);
+                    
+        var nameInput = $(content.find('.name')[0]);
+        nameInput.on('change', function(){
+            $(header).find('span.name').html(this.value);
+        });
+        
+        var newEditor = createEditor(content.find('.codeEditor')[0]);
+	    newEditor.setValue("");
+        newEditor.refresh();
+         
+        var item = {
+            editor: newEditor,
+            content: content
+        };
+        additionalXsdFiles.push(item);
+        
+        var closeButton = $(header.find('.close')[0]);
+        closeButton.on('click', function(){
+            $(header).remove();
+            $(content).remove();
+            additionalXsdFiles.remove(item)
+        });
     });
 });
