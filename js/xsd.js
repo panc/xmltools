@@ -3,13 +3,6 @@
     
     var additionalXsdFiles = [];
     
-    (function () {
-		if (window.validateXML) 
-			$(".console").text("xmllint loaded");
-		else 
-			$(".console").text("xmllint not loaded");
-	})();
-    
 	$("#validateXsd").click(validate);
     
     function validate(){
@@ -18,7 +11,7 @@
 
         clearConsole();
 
-        if (xmlContent < 10) {
+        if (xmlContent.length < 10) {
 			setResult("Enter XML Content");
             consoleWriteLine("Enter XML Content"); 
 			return;
@@ -76,19 +69,7 @@
 	xmlContentEditor.setValue("");
 	
 	var schemaEditor = createEditor($("#xmlSchema")[0]);
-	schemaEditor.setValue(""); 
-    
-    function createEditor(textarea) {
-        return CodeMirror.fromTextArea(textarea, {
-            mode: "application/xml",
-            matchTags: {bothTags: true},
-            lineNumbers: true,
-            lineWrapping: true,
-            theme: "xq-light",
-            viewportMargin: Infinity,
-            extraKeys: { }
-        });
-    }
+	schemaEditor.setValue("");
         
     $('a[data-toggle="tab"][aria-controls="tab4"]').on('shown.bs.tab', function(e) { 
         xmlContentEditor.refresh();

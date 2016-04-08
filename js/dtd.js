@@ -36,12 +36,14 @@
             }
         }
         else {
+            var dtdFileName = $('#dtdFileName').val();
+            
             var files = [
                 { path: 'xml', data: xmlContent },
-                { path: 'subjects.dtd', data: dtdContent }
+                { path: dtdFileName, data: dtdContent }
             ];
             
-            var args = ['--noent', '--dtdvalid', 'subjects.dtd', 'xml'];
+            var args = ['--noent', '--dtdvalid', dtdFileName, 'xml'];
             var result = xmllint(args, files);
             
             errorMessage = result.stderr;
@@ -80,18 +82,6 @@
     
     var dtdEditor = createEditor($("#dtdToValidate")[0]);
 	dtdEditor.setValue("");
-	
-    function createEditor(textarea) {
-        return CodeMirror.fromTextArea(textarea, {
-            mode: "application/xml",
-            matchTags: {bothTags: true},
-            lineNumbers: true,
-            lineWrapping: true,
-            theme: "xq-light",
-            viewportMargin: Infinity,
-            extraKeys: { }
-        });
-    }
 	
     $('a[data-toggle="tab"][aria-controls="tab3"]').on('shown.bs.tab', function(e) { 
         xmlDtdEditor.refresh();

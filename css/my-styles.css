@@ -102,6 +102,10 @@ div.result-item {
     height: auto;
 }
 
+div.xpath-code .CodeMirror {
+    height: 300px !important;
+}
+
 .cm-s-xq-light span.cm-meta {
     color: #60940F;
 }

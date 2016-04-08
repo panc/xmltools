@@ -30,3 +30,15 @@ function getAbsoluteUrl(baseUrl, url) {
 function getFixedUrl(url) {
 	return "http://cors.io/?u=" + url;
 }
+	
+function createEditor(textarea) {
+    return CodeMirror.fromTextArea(textarea, {
+        mode: "application/xml",
+        matchTags: {bothTags: true},
+        lineNumbers: true,
+        lineWrapping: true,
+        theme: "xq-light",
+        viewportMargin: Infinity,
+        extraKeys: { }
+    });
+}
